@@ -74,6 +74,7 @@ class JsonWebTokenDynamicValue {
       console.error(`Unsupported algorithm '${header.alg}' (supports ${SUPPORTED_ALGS.join(', ')})`)
     }
 
-    return jsrsasign.jws.JWS.sign(null, header, payload, secret)
+    const regex = /\\n/g;
+    return jsrsasign.jws.JWS.sign(null, header, payload, secret.replace(regex, '\n'))
   }
 }
